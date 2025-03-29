@@ -163,9 +163,29 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property reticle_scope() As System.Drawing.Bitmap
+        Friend ReadOnly Property icon_small() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("reticle_scope", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("icon_small", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property icon1() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("icon1", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property scope() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("scope", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

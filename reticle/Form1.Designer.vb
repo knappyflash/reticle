@@ -33,6 +33,7 @@ Partial Class Form1
         Me.Label1 = New System.Windows.Forms.Label()
         Me.BtnNextReticle = New System.Windows.Forms.Button()
         Me.BtnPreviousReticle = New System.Windows.Forms.Button()
+        Me.BtnShowCenterOfReticle = New System.Windows.Forms.Button()
         CType(Me.PicBoxMoveUp, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PicBoxMoveDown, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PicBoxMoveRight, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -139,12 +140,22 @@ Partial Class Form1
         Me.BtnPreviousReticle.Text = "Previous Reticle"
         Me.BtnPreviousReticle.UseVisualStyleBackColor = True
         '
+        'BtnShowCenterOfReticle
+        '
+        Me.BtnShowCenterOfReticle.Location = New System.Drawing.Point(511, 153)
+        Me.BtnShowCenterOfReticle.Name = "BtnShowCenterOfReticle"
+        Me.BtnShowCenterOfReticle.Size = New System.Drawing.Size(203, 23)
+        Me.BtnShowCenterOfReticle.TabIndex = 15
+        Me.BtnShowCenterOfReticle.Text = "Show Center of Reticle"
+        Me.BtnShowCenterOfReticle.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.BtnShowCenterOfReticle)
         Me.Controls.Add(Me.BtnPreviousReticle)
         Me.Controls.Add(Me.BtnNextReticle)
         Me.Controls.Add(Me.Label1)
@@ -179,4 +190,5 @@ Partial Class Form1
     Friend WithEvents Label1 As Label
     Friend WithEvents BtnNextReticle As Button
     Friend WithEvents BtnPreviousReticle As Button
+    Friend WithEvents BtnShowCenterOfReticle As Button
 End Class

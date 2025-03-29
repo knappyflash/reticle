@@ -23,12 +23,22 @@ Public Class Reticle_Window
         SetWindowLong(Me.Handle, GWL_EXSTYLE, exStyle Or WS_EX_TRANSPARENT Or WS_EX_LAYERED)
     End Sub
 
-    Public Property MoveByPxAmount
+    Public Property MoveByPxAmount As Long
         Get
             Return _MoveByPxAmount
         End Get
-        Set(value)
+        Set(value As Long)
             _MoveByPxAmount = value
+        End Set
+    End Property
+
+    Public Property ShowCenterOfReticle As Boolean
+        Get
+            Return _ShowCenterOfReticle
+        End Get
+        Set(value As Boolean)
+            _ShowCenterOfReticle = value
+            Me.Invalidate()
         End Set
     End Property
 
@@ -39,12 +49,14 @@ Public Class Reticle_Window
 
     Private ReticleImages() As Image
     Private ReticleImage As Image
-    Private ReticleX As Long
-    Private ReticleY As Long
-    Private ReticleWidth As Long = 30
-    Private ReticleHeight As Long = 30
+    Private ReticleTopLeftX As Long
+    Private ReticleTopLeftY As Long
+    Private ReticleCenterX As Long
+    Private ReticleCenterY As Long
+    Private ReticleWidthHeight As Long = 30
     Private _MoveByPxAmount As Integer = 50
     Private ReticleId As Integer = 0
+    Private _ShowCenterOfReticle As Boolean = False
 
     Private Sub Reticle_Window_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Load_Images()
@@ -53,11 +65,24 @@ Public Class Reticle_Window
 
     Private Sub Reticle_Window_Resize(sender As Object, e As EventArgs) Handles Me.Resize
         Me.Icon = My.Resources.icon
+        Me.DoubleBuffered = True
     End Sub
 
     Private Sub Reticle_Window_Paint(sender As Object, e As PaintEventArgs) Handles Me.Paint
+
         Console.WriteLine($"Painted Window {Now}")
-        e.Graphics.DrawImage(ReticleImage, ReticleX, ReticleY, ReticleWidth, ReticleHeight)
+        e.Graphics.DrawImage(ReticleImage, ReticleTopLeftX, ReticleTopLeftY, ReticleWidthHeight, ReticleWidthHeight)
+
+        If ShowCenterOfReticle = True Then
+            e.Graphics.FillRectangle(
+                New SolidBrush(Color.Blue),
+                CInt(ReticleTopLeftX + (ReticleWidthHeight / 2) - 2),
+                CInt(ReticleTopLeftY + (ReticleWidthHeight / 2) - 2),
+                5,
+                5
+            )
+        End If
+
     End Sub
 
     Public Sub Next_Reticle()
@@ -77,9 +102,9 @@ Public Class Reticle_Window
     Public Sub MoveX(ByVal DecreaseOrIncrease As DecreaseOrIncrease)
         Select Case DecreaseOrIncrease
             Case DecreaseOrIncrease.Decrease
-                ReticleX = (ReticleX - _MoveByPxAmount)
+                ReticleTopLeftX = (ReticleTopLeftX - _MoveByPxAmount)
             Case DecreaseOrIncrease.Increase
-                ReticleX = (ReticleX + _MoveByPxAmount)
+                ReticleTopLeftX = (ReticleTopLeftX + _MoveByPxAmount)
         End Select
         Me.Invalidate()
     End Sub
@@ -87,33 +112,35 @@ Public Class Reticle_Window
     Public Sub MoveY(ByVal DecreaseOrIncrease As DecreaseOrIncrease)
         Select Case DecreaseOrIncrease
             Case DecreaseOrIncrease.Decrease
-                ReticleY = (ReticleY - _MoveByPxAmount)
+                ReticleTopLeftY = (ReticleTopLeftY - _MoveByPxAmount)
             Case DecreaseOrIncrease.Increase
-                ReticleY = (ReticleY + _MoveByPxAmount)
+                ReticleTopLeftY = (ReticleTopLeftY + _MoveByPxAmount)
         End Select
         Me.Invalidate()
     End Sub
 
     Public Sub Grow()
-        ReticleWidth = ReticleWidth + 5
-        ReticleHeight = ReticleHeight + 5
+        ReticleCenterX = CInt(ReticleTopLeftX + (ReticleWidthHeight / 2))
+        ReticleCenterY = CInt(ReticleTopLeftY + (ReticleWidthHeight / 2))
+        ReticleWidthHeight = ReticleWidthHeight + 5
+        ReticleTopLeftX = ReticleCenterX - (ReticleWidthHeight / 2)
+        ReticleTopLeftY = ReticleCenterY - (ReticleWidthHeight / 2)
         Me.Invalidate()
     End Sub
 
     Public Sub Shrink()
-        ReticleWidth = ReticleWidth - 5
-        ReticleHeight = ReticleHeight - 5
+        ReticleCenterX = CInt(ReticleTopLeftX + (ReticleWidthHeight / 2))
+        ReticleCenterY = CInt(ReticleTopLeftY + (ReticleWidthHeight / 2))
+        ReticleWidthHeight = ReticleWidthHeight - 5
+        ReticleTopLeftX = ReticleCenterX - (ReticleWidthHeight / 2)
+        ReticleTopLeftY = ReticleCenterY - (ReticleWidthHeight / 2)
         Me.Invalidate()
     End Sub
 
     Private Sub Load_Images()
         Dim FolderPath As String = $"{Application.StartupPath}\reticle_images"
-        Dim ImageFiles As String() = Directory.GetFiles(FolderPath, "*.*").ToArray()
-
+        Dim ImageFiles As String() = Directory.GetFiles(FolderPath, "*.png").ToArray()
         ReticleImages = ImageFiles.Select(Function(file) Image.FromFile(file)).ToArray()
-
-
-
         ReticleImage = ReticleImages(0)
     End Sub
 
@@ -123,8 +150,8 @@ Public Class Reticle_Window
 
         ' Optional: Ensure the form matches the screen resolution
         Me.Bounds = Screen.PrimaryScreen.Bounds
-        ReticleX = (Me.Width / 2) - (ReticleWidth / 2)
-        ReticleY = (Me.Height / 2) - (ReticleHeight / 2)
+        ReticleTopLeftX = (Me.Width / 2) - (ReticleWidthHeight / 2)
+        ReticleTopLeftY = (Me.Height / 2) - (ReticleWidthHeight / 2)
     End Sub
 
 End Class

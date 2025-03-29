@@ -179,4 +179,14 @@ Public Class Form1
         Reticle_Window.Previous_Reticle()
     End Sub
 
+    Private Sub BtnShowCenterOfReticle_Click(sender As Object, e As EventArgs) Handles BtnShowCenterOfReticle.Click
+        If BtnShowCenterOfReticle.Text = "Show Center of Reticle" Then
+            BtnShowCenterOfReticle.Text = "Hide Center of Reticle"
+            Reticle_Window.ShowCenterOfReticle = True
+        Else
+            BtnShowCenterOfReticle.Text = "Show Center of Reticle"
+            Reticle_Window.ShowCenterOfReticle = False
+        End If
+    End Sub
+
 End Class

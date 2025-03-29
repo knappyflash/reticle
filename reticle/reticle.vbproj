@@ -111,9 +111,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reticle_Window.resx">
       <DependentUpon>Reticle_Window.vb</DependentUpon>
@@ -144,6 +144,19 @@
     <None Include="bin\Debug\ArrowGreen_small_Hover.png" />
     <None Include="bin\Debug\ArrowRed_small_Click.png" />
     <None Include="bin\Debug\ArrowRed_small_Hover.png" />
+    <None Include="bin\Debug\images_other\ArrowBlue_small.png" />
+    <None Include="bin\Debug\images_other\ArrowBlue_small_click.png" />
+    <None Include="bin\Debug\images_other\ArrowBlue_small_hover.png" />
+    <None Include="bin\Debug\images_other\ArrowGreen_small.png" />
+    <None Include="bin\Debug\images_other\ArrowGreen_small_Click.png" />
+    <None Include="bin\Debug\images_other\ArrowGreen_small_Hover.png" />
+    <None Include="bin\Debug\images_other\ArrowRed_small.png" />
+    <None Include="bin\Debug\images_other\ArrowRed_small_Click.png" />
+    <None Include="bin\Debug\images_other\ArrowRed_small_Hover.png" />
+    <None Include="bin\Debug\images_other\icon.png" />
+    <None Include="bin\Debug\images_other\icon_small.png" />
+    <None Include="bin\Debug\images_other\scope.png" />
+    <None Include="bin\Debug\images_other\icon.ico" />
     <Content Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
