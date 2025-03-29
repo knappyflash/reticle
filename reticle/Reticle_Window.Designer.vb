@@ -28,12 +28,12 @@ Partial Class Reticle_Window
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.Black
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(1, Byte), Integer), CType(CType(1, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(800, 450)
         Me.Name = "Reticle_Window"
         Me.Text = "Reticle_Window"
         Me.TopMost = True
-        Me.TransparencyKey = System.Drawing.Color.Black
+        Me.TransparencyKey = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(1, Byte), Integer), CType(CType(1, Byte), Integer))
         Me.ResumeLayout(False)
 
     End Sub

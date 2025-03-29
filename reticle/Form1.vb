@@ -1,4 +1,7 @@
-﻿
+﻿''' Add an upload png dialogbox option '''
+''' Add a hide reticle option '''
+
+
 Imports System.ComponentModel
 
 Public Class Form1
