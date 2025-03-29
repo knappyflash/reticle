@@ -102,8 +102,10 @@ Public Class Reticle_Window
     Public Sub MoveX(ByVal DecreaseOrIncrease As DecreaseOrIncrease)
         Select Case DecreaseOrIncrease
             Case DecreaseOrIncrease.Decrease
+                If (ReticleTopLeftX - _MoveByPxAmount) < (0 - (ReticleWidthHeight * 2)) Then Exit Sub
                 ReticleTopLeftX = (ReticleTopLeftX - _MoveByPxAmount)
             Case DecreaseOrIncrease.Increase
+                If (ReticleTopLeftX + _MoveByPxAmount) > (Me.Width + (ReticleWidthHeight * 2)) Then Exit Sub
                 ReticleTopLeftX = (ReticleTopLeftX + _MoveByPxAmount)
         End Select
         Me.Invalidate()
@@ -112,26 +114,33 @@ Public Class Reticle_Window
     Public Sub MoveY(ByVal DecreaseOrIncrease As DecreaseOrIncrease)
         Select Case DecreaseOrIncrease
             Case DecreaseOrIncrease.Decrease
+                If (ReticleTopLeftY - _MoveByPxAmount) < (0 - (ReticleWidthHeight * 2)) Then Exit Sub
                 ReticleTopLeftY = (ReticleTopLeftY - _MoveByPxAmount)
             Case DecreaseOrIncrease.Increase
+                If (ReticleTopLeftY + _MoveByPxAmount) > (Me.Height + (ReticleWidthHeight * 2)) Then Exit Sub
                 ReticleTopLeftY = (ReticleTopLeftY + _MoveByPxAmount)
         End Select
         Me.Invalidate()
     End Sub
 
     Public Sub Grow()
+        Debug.Print(ReticleWidthHeight)
+        Debug.Print(ReticleWidthHeight * 1.25)
+        If ReticleWidthHeight * 1.25 > 10000 Then Exit Sub
         ReticleCenterX = CInt(ReticleTopLeftX + (ReticleWidthHeight / 2))
         ReticleCenterY = CInt(ReticleTopLeftY + (ReticleWidthHeight / 2))
-        ReticleWidthHeight = ReticleWidthHeight + 5
+        ReticleWidthHeight = ReticleWidthHeight * 1.25
         ReticleTopLeftX = ReticleCenterX - (ReticleWidthHeight / 2)
         ReticleTopLeftY = ReticleCenterY - (ReticleWidthHeight / 2)
         Me.Invalidate()
     End Sub
 
     Public Sub Shrink()
+        Debug.Print(ReticleWidthHeight * 0.75)
+        If (ReticleWidthHeight * 0.75) / 2 <= 2 Then Exit Sub
         ReticleCenterX = CInt(ReticleTopLeftX + (ReticleWidthHeight / 2))
         ReticleCenterY = CInt(ReticleTopLeftY + (ReticleWidthHeight / 2))
-        ReticleWidthHeight = ReticleWidthHeight - 5
+        ReticleWidthHeight = ReticleWidthHeight * 0.75
         ReticleTopLeftX = ReticleCenterX - (ReticleWidthHeight / 2)
         ReticleTopLeftY = ReticleCenterY - (ReticleWidthHeight / 2)
         Me.Invalidate()

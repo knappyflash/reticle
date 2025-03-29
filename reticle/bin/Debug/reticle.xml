@@ -72,7 +72,17 @@ reticle
   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
 </summary>
 </member>
-<member name="P:reticle.My.Resources.Resources.reticle_scope">
+<member name="P:reticle.My.Resources.Resources.icon_small">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:reticle.My.Resources.Resources.icon1">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:reticle.My.Resources.Resources.scope">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
