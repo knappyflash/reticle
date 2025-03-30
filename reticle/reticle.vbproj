@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{E6069CB9-1F9C-4524-8E9E-2E8060D3E204}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>reticle.My.MyApplication</StartupObject>
+    <StartupObject>reticle.Form1</StartupObject>
     <RootNamespace>reticle</RootNamespace>
     <AssemblyName>reticle</AssemblyName>
     <FileAlignment>512</FileAlignment>
