@@ -1,0 +1,109 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+reticle
+</name>
+</assembly>
+<members>
+<member name="T:reticle.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:reticle.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:reticle.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="P:reticle.My.Resources.Resources.ArrowBlue_small">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:reticle.My.Resources.Resources.ArrowBlue_small_click">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:reticle.My.Resources.Resources.ArrowBlue_small_hover">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:reticle.My.Resources.Resources.ArrowGreen_small">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:reticle.My.Resources.Resources.ArrowGreen_small_Click">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:reticle.My.Resources.Resources.ArrowGreen_small_Hover">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:reticle.My.Resources.Resources.ArrowRed_small">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:reticle.My.Resources.Resources.ArrowRed_small_Click">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:reticle.My.Resources.Resources.ArrowRed_small_Hover">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:reticle.My.Resources.Resources.icon">
+<summary>
+  Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+</summary>
+</member>
+<member name="P:reticle.My.Resources.Resources.icon_small">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:reticle.My.Resources.Resources.icon1">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:reticle.My.Resources.Resources.scope">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="M:reticle.Form1.PicBoxMoveUp_MouseEnter(System.Object,System.EventArgs)">
+ Move Up Arrow '''
+</member>
+<member name="M:reticle.Form1.PicBoxMoveDown_MouseEnter(System.Object,System.EventArgs)">
+ Move Down Arrow '''
+</member>
+<member name="M:reticle.Form1.PicBoxMoveLeft_MouseEnter(System.Object,System.EventArgs)">
+ Move Left Arrow '''
+</member>
+<member name="M:reticle.Form1.PicBoxMoveRight_MouseEnter(System.Object,System.EventArgs)">
+ Move Right Arrow '''
+</member>
+<member name="M:reticle.Form1.PicBoxGrow_MouseEnter(System.Object,System.EventArgs)">
+ Grow '''
+</member>
+<member name="M:reticle.Form1.PicBoxShink_MouseEnter(System.Object,System.EventArgs)">
+ Shrink '''
+</member>
+</members>
+</doc>
