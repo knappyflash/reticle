@@ -42,6 +42,16 @@ Public Class Reticle_Window
         End Set
     End Property
 
+    Public Property ShowReticle As Boolean
+        Get
+            Return _ShowReticle
+        End Get
+        Set(value As Boolean)
+            _ShowReticle = value
+            Me.Invalidate()
+        End Set
+    End Property
+
     Public Enum DecreaseOrIncrease
         Decrease = 0
         Increase = 1
@@ -57,6 +67,7 @@ Public Class Reticle_Window
     Private _MoveByPxAmount As Integer = 50
     Private ReticleId As Integer = 0
     Private _ShowCenterOfReticle As Boolean = False
+    Private _ShowReticle As Boolean = True
 
     Private Sub Reticle_Window_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Load_Images()
@@ -70,6 +81,7 @@ Public Class Reticle_Window
 
     Private Sub Reticle_Window_Paint(sender As Object, e As PaintEventArgs) Handles Me.Paint
 
+        If Not ShowReticle Then Exit Sub
         Console.WriteLine($"Painted Window {Now}")
         e.Graphics.DrawImage(ReticleImage, ReticleTopLeftX, ReticleTopLeftY, ReticleWidthHeight, ReticleWidthHeight)
 

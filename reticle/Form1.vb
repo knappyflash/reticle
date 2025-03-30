@@ -192,4 +192,23 @@ Public Class Form1
         End If
     End Sub
 
+    Private Sub BtnHideShow_Click(sender As Object, e As EventArgs) Handles BtnHideShow.Click
+        If BtnHideShow.Text = "Show Reticle" Then
+            BtnHideShow.Text = "Hide Reticle"
+            Reticle_Window.ShowReticle = True
+            For Each control As Control In Me.Controls
+                control.Enabled = True
+            Next
+        Else
+            BtnHideShow.Text = "Show Reticle"
+            Reticle_Window.ShowReticle = False
+            For Each control As Control In Me.Controls
+                If control.Name <> "BtnHideShow" Then
+                    control.Enabled = False
+                End If
+
+            Next
+        End If
+    End Sub
+
 End Class
