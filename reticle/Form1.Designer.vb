@@ -35,6 +35,7 @@ Partial Class Form1
         Me.BtnPreviousReticle = New System.Windows.Forms.Button()
         Me.BtnShowCenterOfReticle = New System.Windows.Forms.Button()
         Me.BtnHideShow = New System.Windows.Forms.Button()
+        Me.BtnCenterReticle = New System.Windows.Forms.Button()
         CType(Me.PicBoxMoveUp, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PicBoxMoveDown, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PicBoxMoveRight, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -152,12 +153,21 @@ Partial Class Form1
         '
         'BtnHideShow
         '
-        Me.BtnHideShow.Location = New System.Drawing.Point(568, 182)
+        Me.BtnHideShow.Location = New System.Drawing.Point(511, 182)
         Me.BtnHideShow.Name = "BtnHideShow"
-        Me.BtnHideShow.Size = New System.Drawing.Size(93, 23)
+        Me.BtnHideShow.Size = New System.Drawing.Size(104, 23)
         Me.BtnHideShow.TabIndex = 16
         Me.BtnHideShow.Text = "Hide Reticle"
         Me.BtnHideShow.UseVisualStyleBackColor = True
+        '
+        'BtnCenterReticle
+        '
+        Me.BtnCenterReticle.Location = New System.Drawing.Point(621, 182)
+        Me.BtnCenterReticle.Name = "BtnCenterReticle"
+        Me.BtnCenterReticle.Size = New System.Drawing.Size(93, 23)
+        Me.BtnCenterReticle.TabIndex = 17
+        Me.BtnCenterReticle.Text = "Center Reticle"
+        Me.BtnCenterReticle.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -165,6 +175,7 @@ Partial Class Form1
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.BtnCenterReticle)
         Me.Controls.Add(Me.BtnHideShow)
         Me.Controls.Add(Me.BtnShowCenterOfReticle)
         Me.Controls.Add(Me.BtnPreviousReticle)
@@ -203,4 +214,5 @@ Partial Class Form1
     Friend WithEvents BtnPreviousReticle As Button
     Friend WithEvents BtnShowCenterOfReticle As Button
     Friend WithEvents BtnHideShow As Button
+    Friend WithEvents BtnCenterReticle As Button
 End Class

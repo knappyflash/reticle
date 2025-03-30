@@ -60,7 +60,7 @@ Public Class Form1
 
     Private Sub PicBoxMoveUp_MouseUp(sender As Object, e As MouseEventArgs) Handles PicBoxMoveUp.MouseUp
         PicBoxMoveUp.Image = My.Resources.ArrowBlue_small_hover
-        Reticle_Window.MoveY(Reticle_Window.DecreaseOrIncrease.Decrease)
+        Reticle_Window.Move(False, False)
     End Sub
 
     ''' Move Down Arrow '''
@@ -82,7 +82,7 @@ Public Class Form1
     Private Sub PicBoxMoveDown_MouseUp(sender As Object, e As MouseEventArgs) Handles PicBoxMoveDown.MouseUp
         PicBoxMoveDown.Image = My.Resources.ArrowBlue_small_hover
         PicBoxMoveDown.Image.RotateFlip(RotateFlipType.Rotate180FlipNone)
-        Reticle_Window.MoveY(Reticle_Window.DecreaseOrIncrease.Increase)
+        Reticle_Window.Move(False, True)
     End Sub
 
     ''' Move Left Arrow '''
@@ -104,7 +104,7 @@ Public Class Form1
     Private Sub PicBoxMoveLeft_MouseUp(sender As Object, e As MouseEventArgs) Handles PicBoxMoveLeft.MouseUp
         PicBoxMoveLeft.Image = My.Resources.ArrowBlue_small_hover
         PicBoxMoveLeft.Image.RotateFlip(RotateFlipType.Rotate270FlipNone)
-        Reticle_Window.MoveX(Reticle_Window.DecreaseOrIncrease.Decrease)
+        Reticle_Window.Move(True, False)
     End Sub
 
 
@@ -127,7 +127,7 @@ Public Class Form1
     Private Sub PicBoxMoveRight_MouseUp(sender As Object, e As MouseEventArgs) Handles PicBoxMoveRight.MouseUp
         PicBoxMoveRight.Image = My.Resources.ArrowBlue_small_hover
         PicBoxMoveRight.Image.RotateFlip(RotateFlipType.Rotate90FlipNone)
-        Reticle_Window.MoveX(Reticle_Window.DecreaseOrIncrease.Increase)
+        Reticle_Window.Move(True, True)
     End Sub
 
 
@@ -209,6 +209,10 @@ Public Class Form1
 
             Next
         End If
+    End Sub
+
+    Private Sub BtnCenterReticle_Click(sender As Object, e As EventArgs) Handles BtnCenterReticle.Click
+        Reticle_Window.Center_Reticle()
     End Sub
 
 End Class
