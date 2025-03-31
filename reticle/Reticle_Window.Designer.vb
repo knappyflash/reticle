@@ -31,6 +31,7 @@ Partial Class Reticle_Window
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(1, Byte), Integer), CType(CType(1, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(800, 450)
         Me.Name = "Reticle_Window"
+        Me.ShowInTaskbar = False
         Me.Text = "Reticle_Window"
         Me.TopMost = True
         Me.TransparencyKey = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(1, Byte), Integer), CType(CType(1, Byte), Integer))

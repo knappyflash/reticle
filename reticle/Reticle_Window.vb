@@ -1,7 +1,10 @@
 ﻿Imports System.IO
 Imports System.Runtime.InteropServices
+Imports System.Drawing.Imaging
 Public Class Reticle_Window
 
+
+    ''' These are to allow mouse clicks through the form
     <DllImport("user32.dll", SetLastError:=True)>
     Private Shared Function SetWindowLong(hWnd As IntPtr, nIndex As Integer, dwNewLong As Integer) As Integer
     End Function
@@ -12,8 +15,6 @@ Public Class Reticle_Window
 
     Protected Overrides Sub OnShown(e As EventArgs)
         MyBase.OnShown(e)
-
-        ' Make the form layered and transparent to mouse events
         Dim exStyle As Integer = GetWindowLong(Me.Handle, GWL_EXSTYLE)
         SetWindowLong(Me.Handle, GWL_EXSTYLE, exStyle Or WS_EX_TRANSPARENT Or WS_EX_LAYERED)
     End Sub
@@ -178,7 +179,7 @@ Public Class Reticle_Window
         Me.WindowState = FormWindowState.Maximized
         Me.FormBorderStyle = FormBorderStyle.None
 
-        Me.Bounds = Screen.PrimaryScreen.Bounds
+        Me.Bounds = Screen.AllScreens(0).Bounds
         Center_Reticle()
 
     End Sub
@@ -187,6 +188,50 @@ Public Class Reticle_Window
         ReticleTopLeftX = (Me.Width / 2) - (ReticleWidthHeight / 2)
         ReticleTopLeftY = (Me.Height / 2) - (ReticleWidthHeight / 2)
         Me.Invalidate()
+    End Sub
+
+    Public Sub ChangeImageHue(ByVal hue As Single)
+        Dim newBitmap As New Bitmap(ReticleImage.Width, ReticleImage.Height)
+
+        Using g As Graphics = Graphics.FromImage(newBitmap)
+            Dim colorMatrix As New ColorMatrix()
+            colorMatrix.Matrix00 = 0.213 + 0.787 * Math.Cos(hue) - 0.213 * Math.Sin(hue)
+            colorMatrix.Matrix01 = 0.213 - 0.213 * Math.Cos(hue) + 0.143 * Math.Sin(hue)
+            colorMatrix.Matrix02 = 0.213 - 0.213 * Math.Cos(hue) - 0.787 * Math.Sin(hue)
+            colorMatrix.Matrix10 = 0.715 - 0.715 * Math.Cos(hue) - 0.715 * Math.Sin(hue)
+            colorMatrix.Matrix11 = 0.715 + 0.285 * Math.Cos(hue) + 0.14 * Math.Sin(hue)
+            colorMatrix.Matrix12 = 0.715 - 0.715 * Math.Cos(hue) + 0.715 * Math.Sin(hue)
+            colorMatrix.Matrix20 = 0.072 - 0.072 * Math.Cos(hue) + 0.928 * Math.Sin(hue)
+            colorMatrix.Matrix21 = 0.072 - 0.072 * Math.Cos(hue) - 0.283 * Math.Sin(hue)
+            colorMatrix.Matrix22 = 0.072 + 0.928 * Math.Cos(hue) + 0.072 * Math.Sin(hue)
+
+            Dim imageAttributes As New ImageAttributes()
+            imageAttributes.SetColorMatrix(colorMatrix)
+
+            g.DrawImage(ReticleImage, New Rectangle(0, 0, ReticleImage.Width, ReticleImage.Height), 0, 0, ReticleImage.Width, ReticleImage.Height, GraphicsUnit.Pixel, imageAttributes)
+        End Using
+
+        ReticleImage = newBitmap
+
+        Me.Invalidate()
+    End Sub
+
+    Public Sub SwitchToNextScreen()
+        Me.WindowState = FormWindowState.Normal
+
+        Dim currentScreen As Screen = Screen.FromControl(Me)
+        Dim screens() As Screen = Screen.AllScreens
+        Dim currentIndex As Integer = Array.IndexOf(screens, currentScreen)
+
+        Dim nextIndex As Integer = (currentIndex + 1) Mod screens.Length
+
+        Dim nextScreen As Screen = screens(nextIndex)
+
+        Me.Bounds = nextScreen.Bounds
+        Me.WindowState = FormWindowState.Maximized
+        Me.FormBorderStyle = FormBorderStyle.None
+
+        Me.Center_Reticle()
     End Sub
 
 End Class

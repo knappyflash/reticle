@@ -36,6 +36,8 @@ Partial Class Form1
         Me.BtnShowCenterOfReticle = New System.Windows.Forms.Button()
         Me.BtnHideShow = New System.Windows.Forms.Button()
         Me.BtnCenterReticle = New System.Windows.Forms.Button()
+        Me.BtnChangeReticleHue = New System.Windows.Forms.Button()
+        Me.BtnSwitchToNextScreen = New System.Windows.Forms.Button()
         CType(Me.PicBoxMoveUp, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PicBoxMoveDown, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PicBoxMoveRight, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -48,7 +50,7 @@ Partial Class Form1
         '
         Me.LblMoveByPxAmount.AutoSize = True
         Me.LblMoveByPxAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblMoveByPxAmount.Location = New System.Drawing.Point(97, 141)
+        Me.LblMoveByPxAmount.Location = New System.Drawing.Point(91, 87)
         Me.LblMoveByPxAmount.Name = "LblMoveByPxAmount"
         Me.LblMoveByPxAmount.Size = New System.Drawing.Size(52, 20)
         Me.LblMoveByPxAmount.TabIndex = 5
@@ -57,7 +59,7 @@ Partial Class Form1
         'PicBoxMoveUp
         '
         Me.PicBoxMoveUp.Image = Global.reticle.My.Resources.Resources.ArrowBlue_small
-        Me.PicBoxMoveUp.Location = New System.Drawing.Point(93, 66)
+        Me.PicBoxMoveUp.Location = New System.Drawing.Point(87, 12)
         Me.PicBoxMoveUp.Name = "PicBoxMoveUp"
         Me.PicBoxMoveUp.Size = New System.Drawing.Size(61, 52)
         Me.PicBoxMoveUp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -67,7 +69,7 @@ Partial Class Form1
         'PicBoxMoveDown
         '
         Me.PicBoxMoveDown.Image = Global.reticle.My.Resources.Resources.ArrowBlue_small
-        Me.PicBoxMoveDown.Location = New System.Drawing.Point(93, 183)
+        Me.PicBoxMoveDown.Location = New System.Drawing.Point(87, 129)
         Me.PicBoxMoveDown.Name = "PicBoxMoveDown"
         Me.PicBoxMoveDown.Size = New System.Drawing.Size(61, 52)
         Me.PicBoxMoveDown.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -77,7 +79,7 @@ Partial Class Form1
         'PicBoxMoveRight
         '
         Me.PicBoxMoveRight.Image = Global.reticle.My.Resources.Resources.ArrowBlue_small
-        Me.PicBoxMoveRight.Location = New System.Drawing.Point(159, 124)
+        Me.PicBoxMoveRight.Location = New System.Drawing.Point(153, 70)
         Me.PicBoxMoveRight.Name = "PicBoxMoveRight"
         Me.PicBoxMoveRight.Size = New System.Drawing.Size(61, 52)
         Me.PicBoxMoveRight.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -87,7 +89,7 @@ Partial Class Form1
         'PicBoxMoveLeft
         '
         Me.PicBoxMoveLeft.Image = Global.reticle.My.Resources.Resources.ArrowBlue_small
-        Me.PicBoxMoveLeft.Location = New System.Drawing.Point(22, 124)
+        Me.PicBoxMoveLeft.Location = New System.Drawing.Point(16, 70)
         Me.PicBoxMoveLeft.Name = "PicBoxMoveLeft"
         Me.PicBoxMoveLeft.Size = New System.Drawing.Size(61, 52)
         Me.PicBoxMoveLeft.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -97,7 +99,7 @@ Partial Class Form1
         'PicBoxShink
         '
         Me.PicBoxShink.Image = Global.reticle.My.Resources.Resources.ArrowRed_small
-        Me.PicBoxShink.Location = New System.Drawing.Point(305, 183)
+        Me.PicBoxShink.Location = New System.Drawing.Point(299, 129)
         Me.PicBoxShink.Name = "PicBoxShink"
         Me.PicBoxShink.Size = New System.Drawing.Size(61, 52)
         Me.PicBoxShink.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -107,7 +109,7 @@ Partial Class Form1
         'PicBoxGrow
         '
         Me.PicBoxGrow.Image = Global.reticle.My.Resources.Resources.ArrowGreen_small
-        Me.PicBoxGrow.Location = New System.Drawing.Point(305, 66)
+        Me.PicBoxGrow.Location = New System.Drawing.Point(299, 12)
         Me.PicBoxGrow.Name = "PicBoxGrow"
         Me.PicBoxGrow.Size = New System.Drawing.Size(61, 52)
         Me.PicBoxGrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -118,7 +120,7 @@ Partial Class Form1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(270, 141)
+        Me.Label1.Location = New System.Drawing.Point(264, 87)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(129, 25)
         Me.Label1.TabIndex = 12
@@ -126,7 +128,7 @@ Partial Class Form1
         '
         'BtnNextReticle
         '
-        Me.BtnNextReticle.Location = New System.Drawing.Point(621, 124)
+        Me.BtnNextReticle.Location = New System.Drawing.Point(524, 12)
         Me.BtnNextReticle.Name = "BtnNextReticle"
         Me.BtnNextReticle.Size = New System.Drawing.Size(93, 23)
         Me.BtnNextReticle.TabIndex = 13
@@ -135,7 +137,7 @@ Partial Class Form1
         '
         'BtnPreviousReticle
         '
-        Me.BtnPreviousReticle.Location = New System.Drawing.Point(511, 124)
+        Me.BtnPreviousReticle.Location = New System.Drawing.Point(414, 12)
         Me.BtnPreviousReticle.Name = "BtnPreviousReticle"
         Me.BtnPreviousReticle.Size = New System.Drawing.Size(104, 23)
         Me.BtnPreviousReticle.TabIndex = 14
@@ -144,7 +146,7 @@ Partial Class Form1
         '
         'BtnShowCenterOfReticle
         '
-        Me.BtnShowCenterOfReticle.Location = New System.Drawing.Point(511, 153)
+        Me.BtnShowCenterOfReticle.Location = New System.Drawing.Point(414, 41)
         Me.BtnShowCenterOfReticle.Name = "BtnShowCenterOfReticle"
         Me.BtnShowCenterOfReticle.Size = New System.Drawing.Size(203, 23)
         Me.BtnShowCenterOfReticle.TabIndex = 15
@@ -153,7 +155,7 @@ Partial Class Form1
         '
         'BtnHideShow
         '
-        Me.BtnHideShow.Location = New System.Drawing.Point(511, 182)
+        Me.BtnHideShow.Location = New System.Drawing.Point(414, 70)
         Me.BtnHideShow.Name = "BtnHideShow"
         Me.BtnHideShow.Size = New System.Drawing.Size(104, 23)
         Me.BtnHideShow.TabIndex = 16
@@ -162,19 +164,39 @@ Partial Class Form1
         '
         'BtnCenterReticle
         '
-        Me.BtnCenterReticle.Location = New System.Drawing.Point(621, 182)
+        Me.BtnCenterReticle.Location = New System.Drawing.Point(524, 70)
         Me.BtnCenterReticle.Name = "BtnCenterReticle"
         Me.BtnCenterReticle.Size = New System.Drawing.Size(93, 23)
         Me.BtnCenterReticle.TabIndex = 17
         Me.BtnCenterReticle.Text = "Center Reticle"
         Me.BtnCenterReticle.UseVisualStyleBackColor = True
         '
+        'BtnChangeReticleHue
+        '
+        Me.BtnChangeReticleHue.Location = New System.Drawing.Point(414, 99)
+        Me.BtnChangeReticleHue.Name = "BtnChangeReticleHue"
+        Me.BtnChangeReticleHue.Size = New System.Drawing.Size(203, 23)
+        Me.BtnChangeReticleHue.TabIndex = 18
+        Me.BtnChangeReticleHue.Text = "Change Reticle Hue"
+        Me.BtnChangeReticleHue.UseVisualStyleBackColor = True
+        '
+        'BtnSwitchToNextScreen
+        '
+        Me.BtnSwitchToNextScreen.Location = New System.Drawing.Point(414, 129)
+        Me.BtnSwitchToNextScreen.Name = "BtnSwitchToNextScreen"
+        Me.BtnSwitchToNextScreen.Size = New System.Drawing.Size(203, 23)
+        Me.BtnSwitchToNextScreen.TabIndex = 19
+        Me.BtnSwitchToNextScreen.Text = "Switch To Next Screen"
+        Me.BtnSwitchToNextScreen.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(689, 202)
+        Me.Controls.Add(Me.BtnSwitchToNextScreen)
+        Me.Controls.Add(Me.BtnChangeReticleHue)
         Me.Controls.Add(Me.BtnCenterReticle)
         Me.Controls.Add(Me.BtnHideShow)
         Me.Controls.Add(Me.BtnShowCenterOfReticle)
@@ -188,7 +210,11 @@ Partial Class Form1
         Me.Controls.Add(Me.PicBoxMoveDown)
         Me.Controls.Add(Me.PicBoxMoveUp)
         Me.Controls.Add(Me.LblMoveByPxAmount)
+        Me.DoubleBuffered = True
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximumSize = New System.Drawing.Size(705, 241)
+        Me.MinimumSize = New System.Drawing.Size(705, 241)
         Me.Name = "Form1"
         Me.Text = "reticle"
         Me.TransparencyKey = System.Drawing.Color.Lime
@@ -215,4 +241,6 @@ Partial Class Form1
     Friend WithEvents BtnShowCenterOfReticle As Button
     Friend WithEvents BtnHideShow As Button
     Friend WithEvents BtnCenterReticle As Button
+    Friend WithEvents BtnChangeReticleHue As Button
+    Friend WithEvents BtnSwitchToNextScreen As Button
 End Class

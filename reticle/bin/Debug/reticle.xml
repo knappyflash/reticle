@@ -105,5 +105,8 @@ reticle
 <member name="M:reticle.Form1.PicBoxShink_MouseEnter(System.Object,System.EventArgs)">
  Shrink '''
 </member>
+<member name="M:reticle.Reticle_Window.SetWindowLong(System.IntPtr,System.Int32,System.Int32)">
+ These are to allow mouse clicks through the form
+</member>
 </members>
 </doc>

@@ -1,12 +1,12 @@
 ﻿''' Add an upload png dialogbox option '''
-''' Add a hide reticle option '''
-
 
 Imports System.ComponentModel
 
 Public Class Form1
 
     Private Reticle_Window As New Reticle_Window
+
+    Private ReticleScreenSelect As Integer = 0
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -213,6 +213,16 @@ Public Class Form1
 
     Private Sub BtnCenterReticle_Click(sender As Object, e As EventArgs) Handles BtnCenterReticle.Click
         Reticle_Window.Center_Reticle()
+    End Sub
+
+    Private Sub BtnChangeReticleHue_Click(sender As Object, e As EventArgs) Handles BtnChangeReticleHue.Click
+        Dim rand As New Random()
+        Dim randomNumber As Integer = rand.Next(0, 255)
+        Reticle_Window.ChangeImageHue(randomNumber)
+    End Sub
+
+    Private Sub BtnSwitchToNextScreen_Click(sender As Object, e As EventArgs) Handles BtnSwitchToNextScreen.Click
+        Reticle_Window.SwitchToNextScreen()
     End Sub
 
 End Class
