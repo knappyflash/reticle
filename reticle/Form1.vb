@@ -1,4 +1,5 @@
 ﻿''' Add an upload png dialogbox option '''
+''' Add SQLite to save users choices '''
 
 Imports System.ComponentModel
 
@@ -223,6 +224,15 @@ Public Class Form1
 
     Private Sub BtnSwitchToNextScreen_Click(sender As Object, e As EventArgs) Handles BtnSwitchToNextScreen.Click
         Reticle_Window.SwitchToNextScreen()
+    End Sub
+
+    Private Sub BtnNewReticlePng_Click(sender As Object, e As EventArgs) Handles BtnNewReticlePng.Click
+        OpenFileDialog1.Filter = "Reticle PNG (*.png)|*.png"
+        OpenFileDialog1.ShowDialog()
+        Dim NewReticlePath As String = OpenFileDialog1.FileName
+        Dim ReticleSavePath As String = $"{Application.StartupPath}\reticle_images\{System.IO.Path.GetFileName(OpenFileDialog1.FileName)}"
+        System.IO.File.Copy(NewReticlePath, ReticleSavePath)
+        Reticle_Window.Load_Images()
     End Sub
 
 End Class

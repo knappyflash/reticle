@@ -163,7 +163,7 @@ Public Class Reticle_Window
         ReticleWidthHeight = ReticleWidthHeight * 0.75
     End Sub
 
-    Private Sub Load_Images()
+    Public Sub Load_Images()
         Dim FolderPath As String = $"{Application.StartupPath}\reticle_images"
         Try
             Dim ImageFiles As String() = Directory.GetFiles(FolderPath, "*.png").ToArray()

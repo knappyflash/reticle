@@ -38,6 +38,8 @@ Partial Class Form1
         Me.BtnCenterReticle = New System.Windows.Forms.Button()
         Me.BtnChangeReticleHue = New System.Windows.Forms.Button()
         Me.BtnSwitchToNextScreen = New System.Windows.Forms.Button()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.BtnNewReticlePng = New System.Windows.Forms.Button()
         CType(Me.PicBoxMoveUp, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PicBoxMoveDown, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PicBoxMoveRight, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -189,12 +191,26 @@ Partial Class Form1
         Me.BtnSwitchToNextScreen.Text = "Switch To Next Screen"
         Me.BtnSwitchToNextScreen.UseVisualStyleBackColor = True
         '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        '
+        'BtnNewReticlePng
+        '
+        Me.BtnNewReticlePng.Location = New System.Drawing.Point(414, 158)
+        Me.BtnNewReticlePng.Name = "BtnNewReticlePng"
+        Me.BtnNewReticlePng.Size = New System.Drawing.Size(104, 23)
+        Me.BtnNewReticlePng.TabIndex = 20
+        Me.BtnNewReticlePng.Text = "New Reticle PNG"
+        Me.BtnNewReticlePng.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(689, 202)
+        Me.Controls.Add(Me.BtnNewReticlePng)
         Me.Controls.Add(Me.BtnSwitchToNextScreen)
         Me.Controls.Add(Me.BtnChangeReticleHue)
         Me.Controls.Add(Me.BtnCenterReticle)
@@ -243,4 +259,6 @@ Partial Class Form1
     Friend WithEvents BtnCenterReticle As Button
     Friend WithEvents BtnChangeReticleHue As Button
     Friend WithEvents BtnSwitchToNextScreen As Button
+    Friend WithEvents OpenFileDialog1 As OpenFileDialog
+    Friend WithEvents BtnNewReticlePng As Button
 End Class
