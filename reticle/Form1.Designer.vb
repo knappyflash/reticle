@@ -42,6 +42,15 @@ Partial Class Form1
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.TimerIncreaseHue = New System.Windows.Forms.Timer(Me.components)
         Me.TimerChangeHue = New System.Windows.Forms.Timer(Me.components)
+        Me.BtnQuickTest = New System.Windows.Forms.Button()
+        Me.TboxQuickTestR = New System.Windows.Forms.TextBox()
+        Me.TboxQuickTestG = New System.Windows.Forms.TextBox()
+        Me.TboxQuickTestB = New System.Windows.Forms.TextBox()
+        Me.TboxQuickTestHue = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
         CType(Me.PicBoxMoveUp, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PicBoxMoveDown, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PicBoxMoveRight, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -197,12 +206,98 @@ Partial Class Form1
         '
         Me.ToolTip1.IsBalloon = True
         '
+        'BtnQuickTest
+        '
+        Me.BtnQuickTest.Location = New System.Drawing.Point(343, 218)
+        Me.BtnQuickTest.Name = "BtnQuickTest"
+        Me.BtnQuickTest.Size = New System.Drawing.Size(93, 23)
+        Me.BtnQuickTest.TabIndex = 21
+        Me.BtnQuickTest.Text = "QuickTest"
+        Me.BtnQuickTest.UseVisualStyleBackColor = True
+        '
+        'TboxQuickTestR
+        '
+        Me.TboxQuickTestR.Location = New System.Drawing.Point(233, 218)
+        Me.TboxQuickTestR.Name = "TboxQuickTestR"
+        Me.TboxQuickTestR.Size = New System.Drawing.Size(100, 20)
+        Me.TboxQuickTestR.TabIndex = 22
+        Me.TboxQuickTestR.Text = "255"
+        '
+        'TboxQuickTestG
+        '
+        Me.TboxQuickTestG.Location = New System.Drawing.Point(233, 247)
+        Me.TboxQuickTestG.Name = "TboxQuickTestG"
+        Me.TboxQuickTestG.Size = New System.Drawing.Size(100, 20)
+        Me.TboxQuickTestG.TabIndex = 24
+        Me.TboxQuickTestG.Text = "255"
+        '
+        'TboxQuickTestB
+        '
+        Me.TboxQuickTestB.Location = New System.Drawing.Point(233, 276)
+        Me.TboxQuickTestB.Name = "TboxQuickTestB"
+        Me.TboxQuickTestB.Size = New System.Drawing.Size(100, 20)
+        Me.TboxQuickTestB.TabIndex = 26
+        Me.TboxQuickTestB.Text = "255"
+        '
+        'TboxQuickTestHue
+        '
+        Me.TboxQuickTestHue.Location = New System.Drawing.Point(233, 305)
+        Me.TboxQuickTestHue.Name = "TboxQuickTestHue"
+        Me.TboxQuickTestHue.Size = New System.Drawing.Size(100, 20)
+        Me.TboxQuickTestHue.TabIndex = 28
+        Me.TboxQuickTestHue.Text = "255"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(213, 219)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(15, 13)
+        Me.Label2.TabIndex = 29
+        Me.Label2.Text = "R"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(213, 250)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(15, 13)
+        Me.Label3.TabIndex = 30
+        Me.Label3.Text = "G"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(213, 279)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(14, 13)
+        Me.Label4.TabIndex = 31
+        Me.Label4.Text = "B"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(198, 305)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(30, 13)
+        Me.Label5.TabIndex = 32
+        Me.Label5.Text = "HUE"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(689, 202)
+        Me.ClientSize = New System.Drawing.Size(689, 461)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.TboxQuickTestHue)
+        Me.Controls.Add(Me.TboxQuickTestB)
+        Me.Controls.Add(Me.TboxQuickTestG)
+        Me.Controls.Add(Me.TboxQuickTestR)
+        Me.Controls.Add(Me.BtnQuickTest)
         Me.Controls.Add(Me.BtnOpenReticleFolder)
         Me.Controls.Add(Me.BtnSwitchToNextScreen)
         Me.Controls.Add(Me.BtnCenterReticle)
@@ -221,7 +316,7 @@ Partial Class Form1
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.MaximumSize = New System.Drawing.Size(705, 241)
+        Me.MaximumSize = New System.Drawing.Size(705, 500)
         Me.MinimumSize = New System.Drawing.Size(705, 241)
         Me.Name = "Form1"
         Me.Text = "reticle"
@@ -254,4 +349,13 @@ Partial Class Form1
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents TimerIncreaseHue As Timer
     Friend WithEvents TimerChangeHue As Timer
+    Friend WithEvents BtnQuickTest As Button
+    Friend WithEvents TboxQuickTestR As TextBox
+    Friend WithEvents TboxQuickTestG As TextBox
+    Friend WithEvents TboxQuickTestB As TextBox
+    Friend WithEvents TboxQuickTestHue As TextBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label5 As Label
 End Class

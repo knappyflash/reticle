@@ -199,6 +199,28 @@ Public Class Reticle_Window
         ReticleWidthHeight = ReticleWidthHeight * 0.75
     End Sub
 
+    Public Sub Change_Rticle_Hue_Color(
+                                      ByVal RedShift As Single,
+                                      ByVal GreenShift As Single,
+                                      ByVal BlueShift As Single,
+                                      ByVal hueShift As Single)
+        If ReticleImage Is Nothing Then Exit Sub
+        Dim bmp As New Bitmap(ReticleImage.Width, ReticleImage.Height)
+        Using g As Graphics = Graphics.FromImage(bmp)
+            Dim cm As New ColorMatrix()
+            cm.Matrix00 = RedShift ' Red
+            cm.Matrix11 = GreenShift ' Green
+            cm.Matrix22 = BlueShift ' Blue
+            cm.Matrix40 = hueShift / 360.0F ' Hue shift
+            Dim ia As New ImageAttributes()
+            ia.SetColorMatrix(cm)
+            g.DrawImage(ReticleImage, New Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia)
+        End Using
+        ReticleImage.Dispose() ' Dispose the old image
+        ReticleImage = bmp ' Set the new image
+        Me.Invalidate() ' Refresh the window to show the new image
+    End Sub
+
     Public Sub Load_Images()
         Dim FolderPath As String = $"{Application.StartupPath}\reticle_images"
         Try

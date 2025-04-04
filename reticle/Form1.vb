@@ -233,4 +233,8 @@ Public Class Form1
         End If
     End Sub
 
+    Private Sub BtnQuickTest_Click(sender As Object, e As EventArgs) Handles BtnQuickTest.Click
+        Reticle_Window.Change_Rticle_Hue_Color(TboxQuickTestR.Text, TboxQuickTestG.Text, TboxQuickTestB.Text, TboxQuickTestHue.Text)
+    End Sub
+
 End Class
