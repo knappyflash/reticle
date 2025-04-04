@@ -71,6 +71,7 @@ Public Class Reticle_Window
         End Set
     End Property
 
+
     Private Const GWL_EXSTYLE As Integer = -20
     Private Const WS_EX_TRANSPARENT As Integer = &H20
     Private Const WS_EX_LAYERED As Integer = &H80000
@@ -79,7 +80,7 @@ Public Class Reticle_Window
 
     Private _ReticleWidthHeight As Long = DefaultReticleWidthHeight
     Private Reticles As New Dictionary(Of String, Image)
-    Private ReticleKey As String
+    Public ReticleKey As String
     Private ReticleImage As Image
     Private ReticleTopLeftX As Long
     Private ReticleTopLeftY As Long

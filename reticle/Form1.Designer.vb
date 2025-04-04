@@ -197,9 +197,6 @@ Partial Class Form1
         '
         Me.ToolTip1.IsBalloon = True
         '
-        'TimerChangeHue
-        '
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
