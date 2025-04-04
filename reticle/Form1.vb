@@ -2,6 +2,7 @@
 ''' Add SQLite to save users choices '''
 
 Imports System.ComponentModel
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 
 Public Class Form1
 
@@ -216,23 +217,20 @@ Public Class Form1
         Reticle_Window.Center_Reticle()
     End Sub
 
-    Private Sub BtnChangeReticleHue_Click(sender As Object, e As EventArgs) Handles BtnChangeReticleHue.Click
-        Dim rand As New Random()
-        Dim randomNumber As Integer = rand.Next(0, 255)
-        Reticle_Window.ChangeImageHue(randomNumber)
-    End Sub
-
     Private Sub BtnSwitchToNextScreen_Click(sender As Object, e As EventArgs) Handles BtnSwitchToNextScreen.Click
         Reticle_Window.SwitchToNextScreen()
     End Sub
 
-    Private Sub BtnNewReticlePng_Click(sender As Object, e As EventArgs) Handles BtnNewReticlePng.Click
-        OpenFileDialog1.Filter = "Reticle PNG (*.png)|*.png"
-        OpenFileDialog1.ShowDialog()
-        Dim NewReticlePath As String = OpenFileDialog1.FileName
-        Dim ReticleSavePath As String = $"{Application.StartupPath}\reticle_images\{System.IO.Path.GetFileName(OpenFileDialog1.FileName)}"
-        System.IO.File.Copy(NewReticlePath, ReticleSavePath)
-        Reticle_Window.Load_Images()
+    Private Sub BtnOpenReticleFolder_Click(sender As Object, e As EventArgs) Handles BtnOpenReticleFolder.Click
+        Dim FolderPath As String = $"{Application.StartupPath}\reticle_images"
+
+        ' Check if the folder exists before trying to open it
+        If IO.Directory.Exists(FolderPath) Then
+            ' Open the folder
+            Process.Start(FolderPath)
+        Else
+            Console.WriteLine("The folder does not exist.")
+        End If
     End Sub
 
 End Class

@@ -22,6 +22,7 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.LblMoveByPxAmount = New System.Windows.Forms.Label()
         Me.PicBoxMoveUp = New System.Windows.Forms.PictureBox()
@@ -36,10 +37,11 @@ Partial Class Form1
         Me.BtnShowCenterOfReticle = New System.Windows.Forms.Button()
         Me.BtnHideShow = New System.Windows.Forms.Button()
         Me.BtnCenterReticle = New System.Windows.Forms.Button()
-        Me.BtnChangeReticleHue = New System.Windows.Forms.Button()
         Me.BtnSwitchToNextScreen = New System.Windows.Forms.Button()
-        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.BtnNewReticlePng = New System.Windows.Forms.Button()
+        Me.BtnOpenReticleFolder = New System.Windows.Forms.Button()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.TimerIncreaseHue = New System.Windows.Forms.Timer(Me.components)
+        Me.TimerChangeHue = New System.Windows.Forms.Timer(Me.components)
         CType(Me.PicBoxMoveUp, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PicBoxMoveDown, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PicBoxMoveRight, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -173,15 +175,6 @@ Partial Class Form1
         Me.BtnCenterReticle.Text = "Center Reticle"
         Me.BtnCenterReticle.UseVisualStyleBackColor = True
         '
-        'BtnChangeReticleHue
-        '
-        Me.BtnChangeReticleHue.Location = New System.Drawing.Point(414, 99)
-        Me.BtnChangeReticleHue.Name = "BtnChangeReticleHue"
-        Me.BtnChangeReticleHue.Size = New System.Drawing.Size(203, 23)
-        Me.BtnChangeReticleHue.TabIndex = 18
-        Me.BtnChangeReticleHue.Text = "Change Reticle Hue"
-        Me.BtnChangeReticleHue.UseVisualStyleBackColor = True
-        '
         'BtnSwitchToNextScreen
         '
         Me.BtnSwitchToNextScreen.Location = New System.Drawing.Point(414, 129)
@@ -191,18 +184,21 @@ Partial Class Form1
         Me.BtnSwitchToNextScreen.Text = "Switch To Next Screen"
         Me.BtnSwitchToNextScreen.UseVisualStyleBackColor = True
         '
-        'OpenFileDialog1
+        'BtnOpenReticleFolder
         '
-        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        Me.BtnOpenReticleFolder.Location = New System.Drawing.Point(414, 158)
+        Me.BtnOpenReticleFolder.Name = "BtnOpenReticleFolder"
+        Me.BtnOpenReticleFolder.Size = New System.Drawing.Size(203, 23)
+        Me.BtnOpenReticleFolder.TabIndex = 20
+        Me.BtnOpenReticleFolder.Text = "Open Reticle Folder"
+        Me.BtnOpenReticleFolder.UseVisualStyleBackColor = True
         '
-        'BtnNewReticlePng
+        'ToolTip1
         '
-        Me.BtnNewReticlePng.Location = New System.Drawing.Point(414, 158)
-        Me.BtnNewReticlePng.Name = "BtnNewReticlePng"
-        Me.BtnNewReticlePng.Size = New System.Drawing.Size(104, 23)
-        Me.BtnNewReticlePng.TabIndex = 20
-        Me.BtnNewReticlePng.Text = "New Reticle PNG"
-        Me.BtnNewReticlePng.UseVisualStyleBackColor = True
+        Me.ToolTip1.IsBalloon = True
+        '
+        'TimerChangeHue
+        '
         '
         'Form1
         '
@@ -210,9 +206,8 @@ Partial Class Form1
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(689, 202)
-        Me.Controls.Add(Me.BtnNewReticlePng)
+        Me.Controls.Add(Me.BtnOpenReticleFolder)
         Me.Controls.Add(Me.BtnSwitchToNextScreen)
-        Me.Controls.Add(Me.BtnChangeReticleHue)
         Me.Controls.Add(Me.BtnCenterReticle)
         Me.Controls.Add(Me.BtnHideShow)
         Me.Controls.Add(Me.BtnShowCenterOfReticle)
@@ -257,8 +252,9 @@ Partial Class Form1
     Friend WithEvents BtnShowCenterOfReticle As Button
     Friend WithEvents BtnHideShow As Button
     Friend WithEvents BtnCenterReticle As Button
-    Friend WithEvents BtnChangeReticleHue As Button
     Friend WithEvents BtnSwitchToNextScreen As Button
-    Friend WithEvents OpenFileDialog1 As OpenFileDialog
-    Friend WithEvents BtnNewReticlePng As Button
+    Friend WithEvents BtnOpenReticleFolder As Button
+    Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents TimerIncreaseHue As Timer
+    Friend WithEvents TimerChangeHue As Timer
 End Class
