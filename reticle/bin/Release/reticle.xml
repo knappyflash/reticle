@@ -27,27 +27,7 @@ reticle
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:reticle.My.Resources.Resources.ArrowBlue_small_click">
-<summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
-</summary>
-</member>
-<member name="P:reticle.My.Resources.Resources.ArrowBlue_small_hover">
-<summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
-</summary>
-</member>
 <member name="P:reticle.My.Resources.Resources.ArrowGreen_small">
-<summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
-</summary>
-</member>
-<member name="P:reticle.My.Resources.Resources.ArrowGreen_small_Click">
-<summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
-</summary>
-</member>
-<member name="P:reticle.My.Resources.Resources.ArrowGreen_small_Hover">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
@@ -57,12 +37,7 @@ reticle
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:reticle.My.Resources.Resources.ArrowRed_small_Click">
-<summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
-</summary>
-</member>
-<member name="P:reticle.My.Resources.Resources.ArrowRed_small_Hover">
+<member name="P:reticle.My.Resources.Resources.floppy_disc">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
@@ -78,6 +53,16 @@ reticle
 </summary>
 </member>
 <member name="P:reticle.My.Resources.Resources.icon1">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:reticle.My.Resources.Resources.load_saved_reticle">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:reticle.My.Resources.Resources.reset">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
@@ -104,6 +89,42 @@ reticle
 </member>
 <member name="M:reticle.Form1.PicBoxShink_MouseEnter(System.Object,System.EventArgs)">
  Shrink '''
+</member>
+<member name="M:reticle.Form1.BtnPreviousReticle_MouseEnter(System.Object,System.EventArgs)">
+ Previous Reticle '''
+</member>
+<member name="M:reticle.Form1.BtnNextReticle_MouseEnter(System.Object,System.EventArgs)">
+ Next Reticle '''
+</member>
+<member name="M:reticle.Form1.BtnLowRed_MouseEnter(System.Object,System.EventArgs)">
+ Lower Red '''
+</member>
+<member name="M:reticle.Form1.BtnLowGreen_MouseEnter(System.Object,System.EventArgs)">
+ Lower Green '''
+</member>
+<member name="M:reticle.Form1.BtnLowBlue_MouseEnter(System.Object,System.EventArgs)">
+ Lower Blue '''
+</member>
+<member name="M:reticle.Form1.BtnHighRed_MouseEnter(System.Object,System.EventArgs)">
+ Increase Red '''
+</member>
+<member name="M:reticle.Form1.BtnHighGreen_MouseEnter(System.Object,System.EventArgs)">
+ Increase Green '''
+</member>
+<member name="M:reticle.Form1.BtnHighBlue_MouseEnter(System.Object,System.EventArgs)">
+ Increase Blue '''
+</member>
+<member name="M:reticle.Form1.BtnSave_MouseEnter(System.Object,System.EventArgs)">
+ Save '''
+</member>
+<member name="M:reticle.Form1.BtnReset_MouseEnter(System.Object,System.EventArgs)">
+ Reset '''
+</member>
+<member name="M:reticle.Form1.BtnOpenSaveReticle_MouseEnter(System.Object,System.EventArgs)">
+ Open Saved Reticle '''
+</member>
+<member name="M:reticle.Form1.LblMoveByPxAmount_MouseHover(System.Object,System.EventArgs)">
+ Move Speed '''
 </member>
 <member name="M:reticle.Reticle_Window.SetWindowLong(System.IntPtr,System.Int32,System.Int32)">
  These are to allow mouse clicks through the form

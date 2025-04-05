@@ -37,11 +37,6 @@ reticle
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:reticle.My.Resources.Resources.background">
-<summary>
-  Looks up a localized resource of type System.Drawing.Bitmap.
-</summary>
-</member>
 <member name="P:reticle.My.Resources.Resources.floppy_disc">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
