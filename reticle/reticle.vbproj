@@ -122,7 +122,7 @@
     <Compile Include="Reticle_Window.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Save_To_File.vb" />
+    <Compile Include="MySQLite_db.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">
@@ -177,6 +177,10 @@
     <None Include="bin\Debug\images_other\icon_small.png" />
     <None Include="bin\Debug\images_other\scope.png" />
     <None Include="bin\Debug\images_other\icon.ico" />
+    <None Include="bin\Debug\images_other\floppy_disk.png" />
+    <None Include="bin\Debug\images_other\reset.png" />
+    <None Include="bin\Debug\images_other\load_saved_reticle.png" />
+    <None Include="bin\Debug\images_other\background.png" />
     <Content Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

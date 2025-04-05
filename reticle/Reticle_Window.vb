@@ -14,6 +14,10 @@ Public Class Reticle_Window
 
     Protected Overrides Sub OnShown(e As EventArgs)
         MyBase.OnShown(e)
+        Set_Window()
+    End Sub
+
+    Private Sub Set_Window()
         Dim exStyle As Integer = GetWindowLong(Me.Handle, GWL_EXSTYLE)
         SetWindowLong(Me.Handle, GWL_EXSTYLE, exStyle Or WS_EX_TRANSPARENT Or WS_EX_LAYERED)
     End Sub
@@ -76,7 +80,7 @@ Public Class Reticle_Window
     Private Const WS_EX_TRANSPARENT As Integer = &H20
     Private Const WS_EX_LAYERED As Integer = &H80000
 
-    Private Const DefaultReticleWidthHeight As Long = 30
+    Private Const DefaultReticleWidthHeight As Long = 200
 
     Private _ReticleWidthHeight As Long = DefaultReticleWidthHeight
     Private Reticles As New Dictionary(Of String, Image)
@@ -94,6 +98,7 @@ Public Class Reticle_Window
     Private Sub Reticle_Window_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Load_Images()
         Set_Full_Screen()
+        Load_Saved_Reticle()
     End Sub
 
     Private Sub Reticle_Window_Resize(sender As Object, e As EventArgs) Handles Me.Resize
@@ -199,26 +204,42 @@ Public Class Reticle_Window
         ReticleWidthHeight = ReticleWidthHeight * 0.75
     End Sub
 
-    Public Sub Change_Rticle_Hue_Color(
-                                      ByVal RedShift As Single,
-                                      ByVal GreenShift As Single,
-                                      ByVal BlueShift As Single,
-                                      ByVal hueShift As Single)
+    Public Sub Change_Rticle_Color_Matrix(
+                                      Optional ByVal RedShift As Single = 1,
+                                      Optional ByVal GreenShift As Single = 1,
+                                      Optional ByVal BlueShift As Single = 1)
+
+        ' Exit if the input image is null
         If ReticleImage Is Nothing Then Exit Sub
+
+        ' Create a new bitmap to hold the modified image
         Dim bmp As New Bitmap(ReticleImage.Width, ReticleImage.Height)
+
+        ' Create a ColorMatrix with scaling for Red, Green, and Blue
+        Dim cm As New ColorMatrix(New Single()() {
+        New Single() {RedShift, 0, 0, 0, 0}, ' Shift Red
+        New Single() {0, GreenShift, 0, 0, 0}, ' Shift Green
+        New Single() {0, 0, BlueShift, 0, 0}, ' Shift Blue
+        New Single() {0, 0, 0, 1, 0}, ' Shift Alpha
+        New Single() {0, 0, 0, 0, 1}  ' Translation (no shift)
+    })
+
+        ' Use Graphics to draw the image with the ColorMatrix applied
         Using g As Graphics = Graphics.FromImage(bmp)
-            Dim cm As New ColorMatrix()
-            cm.Matrix00 = RedShift ' Red
-            cm.Matrix11 = GreenShift ' Green
-            cm.Matrix22 = BlueShift ' Blue
-            cm.Matrix40 = hueShift / 360.0F ' Hue shift
             Dim ia As New ImageAttributes()
-            ia.SetColorMatrix(cm)
-            g.DrawImage(ReticleImage, New Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia)
+            ia.SetColorMatrix(cm) ' Apply the ColorMatrix to ImageAttributes
+            g.DrawImage(ReticleImage,
+                    New Rectangle(0, 0, bmp.Width, bmp.Height),
+                    0, 0, ReticleImage.Width, ReticleImage.Height,
+                    GraphicsUnit.Pixel,
+                    ia)
         End Using
-        ReticleImage.Dispose() ' Dispose the old image
-        ReticleImage = bmp ' Set the new image
-        Me.Invalidate() ' Refresh the window to show the new image
+
+        ' Dispose the old image and replace it with the modified bitmap
+        ReticleImage = bmp
+
+        ' Optionally refresh the UI (if needed in a form application)
+        Me.Invalidate() ' Refresh the window to show the updated image
     End Sub
 
     Public Sub Load_Images()
@@ -276,6 +297,41 @@ Public Class Reticle_Window
         Me.FormBorderStyle = FormBorderStyle.None
 
         Me.Center_Reticle()
+
+        Set_Window()
+
+    End Sub
+
+
+    Public Sub ResetReticle()
+        Next_Reticle()
+        Previous_Reticle()
+        _ReticleWidthHeight = DefaultReticleWidthHeight
+        Center_Reticle()
+        Me.Invalidate()
+    End Sub
+
+    Public Sub SaveReticleImage()
+        Dim filePath As String = $"{Application.StartupPath}\current_reticle\current_reticle.png"
+        ReticleImage.Save(filePath, ImageFormat.Png)
+    End Sub
+
+    Public Sub Load_Saved_Reticle()
+        Dim filePath As String = $"{Application.StartupPath}\current_reticle\current_reticle.png"
+        Try
+            If File.Exists(filePath) Then
+                Using TempImg As Image = Image.FromFile(filePath)
+                    ' Create a copy of the image to release the file handle
+                    ReticleImage = New Bitmap(TempImg)
+                End Using
+                ' Refresh the UI to reflect the loaded image
+                Me.Invalidate()
+            Else
+                Console.WriteLine("File not found: " & filePath)
+            End If
+        Catch ex As Exception
+            Console.WriteLine("Error loading image: " & ex.Message)
+        End Try
     End Sub
 
 End Class

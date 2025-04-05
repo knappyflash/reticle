@@ -1,5 +1,5 @@
 ﻿Imports System.Data.Sql
-Public Class Save_To_File
+Public Class MySQLite_db
 
     Public Sub New()
 
