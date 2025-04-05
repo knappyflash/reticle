@@ -7,7 +7,7 @@ Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 
 Public Class Form1
 
-    Private Reticle_Window As New Reticle_Window
+    Private Reticle As New Reticle
     Private MySQLite_db As New MySQLite_db
 
     Private ReticleScreenSelect As Integer = 0
@@ -35,7 +35,7 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        Reticle_Window.Show()
+        Reticle.Show()
 
         ImgArrowRedUp = My.Resources.ArrowRed_small
         ImgArrowRedDown = My.Resources.ArrowRed_small
@@ -91,6 +91,8 @@ Public Class Form1
         BtnReset.Image = ImgReset
         BtnOpenSaveReticle.Image = ImgOpenSave
 
+        LoadFromSave()
+
     End Sub
 
     Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
@@ -105,16 +107,16 @@ Public Class Form1
         Select Case LblMoveByPxAmount.Text
             Case "50 px"
                 LblMoveByPxAmount.Text = "20 px"
-                Reticle_Window.MoveByPxAmount = 20
+                Reticle.MoveByPxAmount = 20
             Case "20 px"
                 LblMoveByPxAmount.Text = "5 px"
-                Reticle_Window.MoveByPxAmount = 5
+                Reticle.MoveByPxAmount = 5
             Case "5 px"
                 LblMoveByPxAmount.Text = "1 px"
-                Reticle_Window.MoveByPxAmount = 1
+                Reticle.MoveByPxAmount = 1
             Case "1 px"
                 LblMoveByPxAmount.Text = "50 px"
-                Reticle_Window.MoveByPxAmount = 50
+                Reticle.MoveByPxAmount = 50
         End Select
     End Sub
 
@@ -459,12 +461,22 @@ Public Class Form1
 
     Private Sub BtnSave_MouseDown(sender As Object, e As MouseEventArgs) Handles BtnSave.MouseDown
         BtnSave.Image = Change_Img_Color_Matrix(BtnSave.Image, RedShift:=1.9, GreenShift:=1.9, BlueShift:=1.9)
-        Reticle_Window.SaveReticleImage()
     End Sub
 
     Private Sub BtnSave_MouseUp(sender As Object, e As MouseEventArgs) Handles BtnSave.MouseUp
         BtnSave.Image = ImgFloppyDisc
         BtnSave.Image = Change_Img_Color_Matrix(BtnSave.Image, RedShift:=1.9, GreenShift:=1.5)
+        Reticle.TopMost = False
+        Dim MsgBoxAnswer As Integer = MsgBox("Are you sure you want to override the current save?", MsgBoxStyle.YesNo, "Save Reticle")
+        Reticle.TopMost = True
+        If MsgBoxAnswer = 6 Then
+            Reticle.SaveReticleImage()
+            Console.WriteLine($"X {Reticle.X}")
+            Console.WriteLine($"Y {Reticle.Y}")
+            Console.WriteLine($"SIZE {Reticle.Size}")
+            Console.WriteLine($"INDEX {Reticle.ScreenIndex}")
+            MySQLite_db.Save_To_Database(Reticle.X, Reticle.Y, Reticle.Size, Reticle.ScreenIndex)
+        End If
     End Sub
 
 
@@ -482,7 +494,7 @@ Public Class Form1
 
     Private Sub BtnReset_MouseDown(sender As Object, e As MouseEventArgs) Handles BtnReset.MouseDown
         BtnReset.Image = Change_Img_Color_Matrix(BtnReset.Image, RedShift:=1.9, GreenShift:=1.9, BlueShift:=1.9)
-        Reticle_Window.ResetReticle()
+        Reticle.ResetReticle()
     End Sub
 
     Private Sub BtnReset_MouseUp(sender As Object, e As MouseEventArgs) Handles BtnReset.MouseUp
@@ -492,7 +504,12 @@ Public Class Form1
 
 
 
-    ''' Open Saved Reticle '''
+
+
+
+
+
+    ''' Load Saved Reticle '''
     Private Sub BtnOpenSaveReticle_MouseEnter(sender As Object, e As EventArgs) Handles BtnOpenSaveReticle.MouseEnter
         BtnOpenSaveReticle.Image = Change_Img_Color_Matrix(BtnOpenSaveReticle.Image, RedShift:=1.9, GreenShift:=1.5)
         ToolTip1.SetToolTip(sender, "Load Save")
@@ -504,18 +521,52 @@ Public Class Form1
 
     Private Sub BtnOpenSaveReticle_MouseDown(sender As Object, e As MouseEventArgs) Handles BtnOpenSaveReticle.MouseDown
         BtnOpenSaveReticle.Image = Change_Img_Color_Matrix(BtnOpenSaveReticle.Image, RedShift:=1.9, GreenShift:=1.9, BlueShift:=1.9)
-        Reticle_Window.Load_Saved_Reticle()
     End Sub
 
     Private Sub BtnOpenSaveReticle_MouseUp(sender As Object, e As MouseEventArgs) Handles BtnOpenSaveReticle.MouseUp
         BtnOpenSaveReticle.Image = ImgOpenSave
         BtnOpenSaveReticle.Image = Change_Img_Color_Matrix(BtnOpenSaveReticle.Image, RedShift:=1.9, GreenShift:=1.5)
+        LoadFromSave()
+    End Sub
+    Private Sub LoadFromSave()
+
+        Dim MyX As Long = 0
+        Dim MyY As Long = 0
+        Dim MySize As Long = 200
+        Dim MyScreenIndex As Integer = 0
+
+        Reticle.Load_Saved_Reticle()
+
+        MySQLite_db.Load_From_Database(MyX, MyY, MySize, MyScreenIndex)
+
+        Console.WriteLine($"INDEX {MyScreenIndex}")
+        Console.WriteLine($"SIZE {MySize}")
+        Console.WriteLine($"X {MyX}")
+        Console.WriteLine($"Y {MyY}")
+
+        Reticle.ScreenIndex = MyScreenIndex
+        Reticle.Size = MySize
+        Reticle.X = MyX
+        Reticle.Y = MyY
+
+        If ((MyX = 0) And (MyY = 0)) Then
+            Reticle.Center_Reticle()
+        End If
+
+        Reticle.Invalidate()
+
     End Sub
 
 
 
+
+
+
+
+
+
     ''' Move Speed '''
-    Private Sub LblMoveByPxAmount_MouseHover(sender As Object, e As EventArgs) Handles LblMoveByPxAmount.MouseHover
+    Private Sub LblMoveByPxAmount_MouseHover(sender As Object, e As EventArgs) Handles LblMoveByPxAmount.MouseEnter
         ToolTip1.SetToolTip(sender, "Move Speed")
     End Sub
 
@@ -527,23 +578,23 @@ Public Class Form1
     Private Sub BtnShowCenterOfReticle_Click(sender As Object, e As EventArgs) Handles BtnShowCenterOfReticle.Click
         If BtnShowCenterOfReticle.Text = "Show Center of Reticle" Then
             BtnShowCenterOfReticle.Text = "Hide Center of Reticle"
-            Reticle_Window.ShowCenterOfReticle = True
+            Reticle.ShowCenterOfReticle = True
         Else
             BtnShowCenterOfReticle.Text = "Show Center of Reticle"
-            Reticle_Window.ShowCenterOfReticle = False
+            Reticle.ShowCenterOfReticle = False
         End If
     End Sub
 
     Private Sub BtnHideShow_Click(sender As Object, e As EventArgs) Handles BtnHideShow.Click
         If BtnHideShow.Text = "Show Reticle" Then
             BtnHideShow.Text = "Hide Reticle"
-            Reticle_Window.ShowReticle = True
+            Reticle.ShowReticle = True
             For Each control As Control In Me.Controls
                 control.Enabled = True
             Next
         Else
             BtnHideShow.Text = "Show Reticle"
-            Reticle_Window.ShowReticle = False
+            Reticle.ShowReticle = False
             For Each control As Control In Me.Controls
                 If control.Name <> "BtnHideShow" Then
                     control.Enabled = False
@@ -554,11 +605,11 @@ Public Class Form1
     End Sub
 
     Private Sub BtnCenterReticle_Click(sender As Object, e As EventArgs) Handles BtnCenterReticle.Click
-        Reticle_Window.Center_Reticle()
+        Reticle.Center_Reticle()
     End Sub
 
     Private Sub BtnSwitchToNextScreen_Click(sender As Object, e As EventArgs) Handles BtnSwitchToNextScreen.Click
-        Reticle_Window.SwitchToNextScreen()
+        Reticle.SwitchToNextScreen()
     End Sub
 
     Private Sub BtnOpenReticleFolder_Click(sender As Object, e As EventArgs) Handles BtnOpenReticleFolder.Click
@@ -622,33 +673,33 @@ Public Class Form1
         Select Case LoopAction
             Case ""
             Case "Move Up"
-                Reticle_Window.Move(False, False)
+                Reticle.Move(False, False)
             Case "Move Down"
-                Reticle_Window.Move(False, True)
+                Reticle.Move(False, True)
             Case "Move Left"
-                Reticle_Window.Move(True, False)
+                Reticle.Move(True, False)
             Case "Move Right"
-                Reticle_Window.Move(True, True)
+                Reticle.Move(True, True)
             Case "Grow"
-                Reticle_Window.Grow()
+                Reticle.Grow()
             Case "Shrink"
-                Reticle_Window.Shrink()
+                Reticle.Shrink()
             Case "Previous Reticle"
-                Reticle_Window.Previous_Reticle()
+                Reticle.Previous_Reticle()
             Case "Next Reticle"
-                Reticle_Window.Next_Reticle()
+                Reticle.Next_Reticle()
             Case "Decrease Red"
-                Reticle_Window.Change_Rticle_Color_Matrix(RedShift:=DecreaseBy)
+                Reticle.Change_Rticle_Color_Matrix(RedShift:=DecreaseBy)
             Case "Decrease Green"
-                Reticle_Window.Change_Rticle_Color_Matrix(GreenShift:=DecreaseBy)
+                Reticle.Change_Rticle_Color_Matrix(GreenShift:=DecreaseBy)
             Case "Decrease Blue"
-                Reticle_Window.Change_Rticle_Color_Matrix(BlueShift:=DecreaseBy)
+                Reticle.Change_Rticle_Color_Matrix(BlueShift:=DecreaseBy)
             Case "Increase Red"
-                Reticle_Window.Change_Rticle_Color_Matrix(RedShift:=Increaseby)
+                Reticle.Change_Rticle_Color_Matrix(RedShift:=Increaseby)
             Case "Increase Green"
-                Reticle_Window.Change_Rticle_Color_Matrix(GreenShift:=Increaseby)
+                Reticle.Change_Rticle_Color_Matrix(GreenShift:=Increaseby)
             Case "Increase Blue"
-                Reticle_Window.Change_Rticle_Color_Matrix(BlueShift:=Increaseby)
+                Reticle.Change_Rticle_Color_Matrix(BlueShift:=Increaseby)
         End Select
     End Sub
 

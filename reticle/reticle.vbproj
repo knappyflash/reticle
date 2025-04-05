@@ -116,10 +116,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Reticle_Window.Designer.vb">
-      <DependentUpon>Reticle_Window.vb</DependentUpon>
+    <Compile Include="Reticle.Designer.vb">
+      <DependentUpon>Reticle.vb</DependentUpon>
     </Compile>
-    <Compile Include="Reticle_Window.vb">
+    <Compile Include="Reticle.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MySQLite_db.vb" />
@@ -134,8 +134,8 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reticle_Window.resx">
-      <DependentUpon>Reticle_Window.vb</DependentUpon>
+    <EmbeddedResource Include="Reticle.resx">
+      <DependentUpon>Reticle.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

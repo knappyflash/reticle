@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 Imports System.Runtime.InteropServices
 Imports System.Drawing.Imaging
-Public Class Reticle_Window
+Public Class Reticle
 
     ''' These are to allow mouse clicks through the form
     <DllImport("user32.dll", SetLastError:=True)>
@@ -51,9 +51,9 @@ Public Class Reticle_Window
         End Set
     End Property
 
-    Public Property ReticleWidthHeight As Long
+    Public Property Size As Long
         Get
-            Return _ReticleWidthHeight
+            Return _Size
         End Get
         Set(value As Long)
             If value <= 2 Then
@@ -62,34 +62,63 @@ Public Class Reticle_Window
                 value = 9999
             End If
 
+            Dim ReticleCenterX As Long
+            Dim ReticleCenterY As Long
+
             ''' Keep the reticle centered '''
-            ReticleCenterX = CInt(ReticleTopLeftX + (_ReticleWidthHeight / 2))
-            ReticleCenterY = CInt(ReticleTopLeftY + (_ReticleWidthHeight / 2))
+            ReticleCenterX = CInt(ReticleTopLeftX + (_Size / 2))
+            ReticleCenterY = CInt(ReticleTopLeftY + (_Size / 2))
 
-            _ReticleWidthHeight = value
+            _Size = value
 
-            ReticleTopLeftX = ReticleCenterX - (ReticleWidthHeight / 2)
-            ReticleTopLeftY = ReticleCenterY - (ReticleWidthHeight / 2)
+            ReticleTopLeftX = ReticleCenterX - (_Size / 2)
+            ReticleTopLeftY = ReticleCenterY - (_Size / 2)
 
             Me.Invalidate()
         End Set
     End Property
+
+    Public Property X As Long
+        Get
+            Return ReticleTopLeftX
+        End Get
+        Set(value As Long)
+            ReticleTopLeftX = value
+        End Set
+    End Property
+
+    Public Property Y As Long
+        Get
+            Return ReticleTopLeftY
+        End Get
+        Set(value As Long)
+            ReticleTopLeftY = value
+        End Set
+    End Property
+
+    Public Property ScreenIndex As Integer
+        Get
+            Return Get_Screen_Index()
+        End Get
+        Set(value As Integer)
+            SwitchToNextScreen(value)
+        End Set
+    End Property
+
 
 
     Private Const GWL_EXSTYLE As Integer = -20
     Private Const WS_EX_TRANSPARENT As Integer = &H20
     Private Const WS_EX_LAYERED As Integer = &H80000
 
-    Private Const DefaultReticleWidthHeight As Long = 200
+    Private Const DefaultSize As Long = 200
 
-    Private _ReticleWidthHeight As Long = DefaultReticleWidthHeight
+    Private _Size As Long = DefaultSize
     Private Reticles As New Dictionary(Of String, Image)
     Public ReticleKey As String
     Private ReticleImage As Image
     Private ReticleTopLeftX As Long
     Private ReticleTopLeftY As Long
-    Private ReticleCenterX As Long
-    Private ReticleCenterY As Long
     Private _MoveByPxAmount As Integer = 50
     Private ReticleId As Integer = 0
     Private _ShowCenterOfReticle As Boolean = False
@@ -98,10 +127,9 @@ Public Class Reticle_Window
     Private Sub Reticle_Window_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Load_Images()
         Set_Full_Screen()
-        Load_Saved_Reticle()
     End Sub
 
-    Private Sub Reticle_Window_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+    Private Sub Reticle_Window_ReSize(sender As Object, e As EventArgs) Handles Me.Resize
         Me.Icon = My.Resources.icon
         Me.DoubleBuffered = True
     End Sub
@@ -109,13 +137,13 @@ Public Class Reticle_Window
     Private Sub Reticle_Window_Paint(sender As Object, e As PaintEventArgs) Handles Me.Paint
 
         If Not ShowReticle Then Exit Sub
-        e.Graphics.DrawImage(ReticleImage, ReticleTopLeftX, ReticleTopLeftY, ReticleWidthHeight, ReticleWidthHeight)
+        e.Graphics.DrawImage(ReticleImage, ReticleTopLeftX, ReticleTopLeftY, Size, Size)
 
         If ShowCenterOfReticle = True Then
             e.Graphics.FillRectangle(
                 New SolidBrush(Color.Blue),
-                CInt(ReticleTopLeftX + (ReticleWidthHeight / 2) - 2),
-                CInt(ReticleTopLeftY + (ReticleWidthHeight / 2) - 2),
+                CInt(ReticleTopLeftX + (Size / 2) - 2),
+                CInt(ReticleTopLeftY + (Size / 2) - 2),
                 5,
                 5
             )
@@ -173,10 +201,10 @@ Public Class Reticle_Window
 
     Public Sub Move(ByVal AlongX As Boolean, ByVal ShouldIncrease As Boolean)
 
-        If (ReticleTopLeftX + _MoveByPxAmount) > (Me.Width + (ReticleWidthHeight * 2)) Then Center_Reticle()
-        If (ReticleTopLeftY + _MoveByPxAmount) > (Me.Height + (ReticleWidthHeight * 2)) Then Center_Reticle()
-        If (ReticleTopLeftY - _MoveByPxAmount) < (0 - (ReticleWidthHeight * 2)) Then Center_Reticle()
-        If (ReticleTopLeftX - _MoveByPxAmount) < (0 - (ReticleWidthHeight * 2)) Then Center_Reticle()
+        If (ReticleTopLeftX + _MoveByPxAmount) > (Me.Width + (Size * 2)) Then Center_Reticle()
+        If (ReticleTopLeftY + _MoveByPxAmount) > (Me.Height + (Size * 2)) Then Center_Reticle()
+        If (ReticleTopLeftY - _MoveByPxAmount) < (0 - (Size * 2)) Then Center_Reticle()
+        If (ReticleTopLeftX - _MoveByPxAmount) < (0 - (Size * 2)) Then Center_Reticle()
 
         If AlongX Then
             If ShouldIncrease Then
@@ -197,11 +225,11 @@ Public Class Reticle_Window
     End Sub
 
     Public Sub Grow()
-        ReticleWidthHeight = ReticleWidthHeight * 1.25
+        Size = Size * 1.25
     End Sub
 
     Public Sub Shrink()
-        ReticleWidthHeight = ReticleWidthHeight * 0.75
+        Size = Size * 0.75
     End Sub
 
     Public Sub Change_Rticle_Color_Matrix(
@@ -276,12 +304,12 @@ Public Class Reticle_Window
     End Sub
 
     Public Sub Center_Reticle()
-        ReticleTopLeftX = (Me.Width / 2) - (ReticleWidthHeight / 2)
-        ReticleTopLeftY = (Me.Height / 2) - (ReticleWidthHeight / 2)
+        ReticleTopLeftX = (Me.Width / 2) - (Size / 2)
+        ReticleTopLeftY = (Me.Height / 2) - (Size / 2)
         Me.Invalidate()
     End Sub
 
-    Public Sub SwitchToNextScreen()
+    Public Sub SwitchToNextScreen(Optional ByVal ScreenIndex As Integer = -1)
         Me.WindowState = FormWindowState.Normal
 
         Dim currentScreen As Screen = Screen.FromControl(Me)
@@ -290,6 +318,8 @@ Public Class Reticle_Window
 
         Dim nextIndex As Integer = (currentIndex + 1) Mod screens.Length
 
+        If ScreenIndex <> -1 Then nextIndex = ScreenIndex
+        Console.WriteLine($"Switching to Screen: {nextIndex}")
         Dim nextScreen As Screen = screens(nextIndex)
 
         Me.Bounds = nextScreen.Bounds
@@ -302,11 +332,18 @@ Public Class Reticle_Window
 
     End Sub
 
+    Private Function Get_Screen_Index() As Integer
+        Dim currentScreen As Screen = Screen.FromControl(Me)
+        Dim screens() As Screen = Screen.AllScreens
+        Dim currentIndex As Integer = Array.IndexOf(screens, currentScreen)
+        Return currentIndex
+    End Function
+
 
     Public Sub ResetReticle()
         Next_Reticle()
         Previous_Reticle()
-        _ReticleWidthHeight = DefaultReticleWidthHeight
+        _Size = DefaultSize
         Center_Reticle()
         Me.Invalidate()
     End Sub
