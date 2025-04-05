@@ -121,12 +121,12 @@ reticle
  Reset '''
 </member>
 <member name="M:reticle.Form1.BtnOpenSaveReticle_MouseEnter(System.Object,System.EventArgs)">
- Open Saved Reticle '''
+ Load Saved Reticle '''
 </member>
 <member name="M:reticle.Form1.LblMoveByPxAmount_MouseHover(System.Object,System.EventArgs)">
  Move Speed '''
 </member>
-<member name="M:reticle.Reticle_Window.SetWindowLong(System.IntPtr,System.Int32,System.Int32)">
+<member name="M:reticle.Reticle.SetWindowLong(System.IntPtr,System.Int32,System.Int32)">
  These are to allow mouse clicks through the form
 </member>
 </members>
